@@ -319,7 +319,7 @@ class KeywordPerformance(ReportsStream):
 
     records_jsonpath = "$.results[*]"
     name = "keyword_performance"
-    primary_keys_jsonpaths = ["keyword_view.resource_name", "segments.date"]
+    primary_keys_jsonpaths = ["ad_group_criterion.resource_name", "segments.date"]
     primary_keys = ["_sdc_primary_key"]
     replication_key = None
     schema_filepath = SCHEMAS_DIR / "keyword_performance.json"
