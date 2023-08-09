@@ -278,7 +278,6 @@ class CampaignPerformance(ReportsStream):
                  , campaign.end_date
                  , campaign.advertising_channel_type
                  , campaign.advertising_channel_sub_type
-                 , segments.device
                  , segments.date
                  , metrics.conversions
                  , metrics.impressions
@@ -286,6 +285,7 @@ class CampaignPerformance(ReportsStream):
                  , metrics.ctr
                  , metrics.average_cpc
                  , metrics.cost_micros 
+                 , metrics.search_impression_share
             FROM campaign 
             WHERE segments.date {self.between_filter}
             """
@@ -296,6 +296,36 @@ class CampaignPerformance(ReportsStream):
     primary_keys = ["_sdc_primary_key"]
     replication_key = None
     schema_filepath = SCHEMAS_DIR / "campaign_performance.json"
+
+
+class KeywordPerformance(ReportsStream):
+    """Keyword Performance"""
+
+    @property
+    def gaql(self) -> str:
+        return f"""
+            SELECT 
+                campaign.name,
+                campaign.id,
+                segments.date,
+                ad_group_criterion.resource_name
+                ad_group_criterion.display_name,
+                ad_group_criterion.keyword.text,
+                metrics.impressions,
+                metrics.search_impression_share,
+            FROM keyword_view
+            WHERE segments.date {self.between_filter}
+            """
+
+    records_jsonpath = "$.results[*]"
+    name = "keyword_performance"
+    primary_keys_jsonpaths = ["keyword_view.resource_name", "segments.date"]
+    primary_keys = ["_sdc_primary_key"]
+    replication_key = None
+    schema_filepath = SCHEMAS_DIR / "keyword_performance.json"
+
+
+
 
 
 class CampaignPerformanceByAgeRangeAndDevice(ReportsStream):

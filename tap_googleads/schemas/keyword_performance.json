@@ -4,38 +4,30 @@
         "_sdc_primary_key": {
             "type": "string"
         },
-        "campaign": {
+        "adGroupCriterion": {
             "type": "object",
             "properties": {
                 "resourceName": {
                     "type": "string"
                 },
-                "status": {
+                "displayName": {
                     "type": "string"
                 },
-                "name": {
-                    "type": "string"
-                },
-                "startDate": {
-                    "type": "string"
-                },
-                "endDate": {
-                    "type": "string"
-                },
-                "advertisingChannelType": {
-                    "type": "string"
-                },
-                "AdvertisingChannelSubType": {
-                    "type": "string"
+                "keyword":
+                {
+                    "type": "object",
+                    "properties":
+                        {
+                            "text": {
+                                "type": "string"
+                            }
+                        }
                 }
             }
         },
         "metrics": {
             "type": "object",
             "properties": {
-                "conversions": {
-                    "type": "number"
-                },
                 "clicks": {
                     "type": "string"
                 },
