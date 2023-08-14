@@ -86,8 +86,8 @@ class CustomerHierarchyStream(GoogleAdsStream):
             One item per (possibly processed) record in the API.
         """
         client_ids = []
-        if self.config["login_customer_id"]:
-            client_ids = [self.config["login_customer_id"]]
+        if self.config["customer_id"]:
+            client_ids = [self.config["customer_id"]]
         else:
             # TODO when implementing this the headers need to be set properly
             client_ids = context["resourceNames"]
